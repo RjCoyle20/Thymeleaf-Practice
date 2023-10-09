@@ -1,8 +1,6 @@
 package org.launchcode.demo.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -15,18 +13,33 @@ public class Event {
     private String name;
     @Size(max = 500, message = "Description too long!")
     private String description;
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email. Try again.")
+//    @NotBlank(message = "Email is required")
+//    @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message = "Location is required")
+    @NotNull(message = "Please enter valid location")
+    private String location;
+
+    @AssertTrue(message = "Must be attendable")
+    private boolean attendable;
+
+    @Positive(message = "Must be a number over 0")
+    private int capacity;
+
+    public Event(String name, String description, String contactEmail, String location, boolean attendable, int capacity) {
+        this();
         this.name = name;
         this.description= description;
         this.contactEmail= contactEmail;
+        this.location = location;
+        this.attendable = attendable;
+        this.capacity = capacity;
+    }
+    public Event(){
         this.id= nextId;
         nextId++;
-    }
-    public Event(){};
+    };
 
     public String getName() {
         return name;
@@ -50,6 +63,30 @@ public class Event {
 
     public void setContractEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isAttendable() {
+        return attendable;
+    }
+
+    public void setAttendable(boolean attendable) {
+        this.attendable = attendable;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getId() {
