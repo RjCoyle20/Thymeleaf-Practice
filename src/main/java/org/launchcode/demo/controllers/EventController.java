@@ -3,6 +3,7 @@ package org.launchcode.demo.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.demo.data.EventData;
 import org.launchcode.demo.models.Event;
+import org.launchcode.demo.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class EventController {
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
